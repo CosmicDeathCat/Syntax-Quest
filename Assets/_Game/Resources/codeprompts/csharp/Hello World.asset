@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e59e10e3d3b0e648baf502008a74ac1, type: 3}
+  m_Name: Hello World
+  m_EditorClassIdentifier: 
+  programmingLanguage: 2
+  category: 64
+  questionPrompt: 'What is the correct syntax to output "Hello World" in C#
+
+    1:
+    Console.WriteLine("Hello World");
+
+    2: print ("Hello World");
+
+    3: System.out.println("Hello
+    World");
+
+    4: cout << "Hello World";'
+  answer: 1
+  difficulty: 1
+  learned: 0
+  sampleCode: 
+  hint: Remember C# best practices is defining methods Pascal Case like MethodName
+    so which of these answers fit that criteria?
+  tags: []
+  explanation: We are accessing the Console class and the WriteLine method to print
+    out to the console.

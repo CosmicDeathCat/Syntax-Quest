@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e59e10e3d3b0e648baf502008a74ac1, type: 3}
+  m_Name: Diff Ref and Out
+  m_EditorClassIdentifier: 
+  programmingLanguage: 2
+  category: 64
+  questionPrompt: "What is the difference between the 'ref' and 'out' keywords in
+    C#?\r\n1: 'ref' and 'out' are used interchangeably for both input and output
+    parameters.\r   \r\n2: 'ref' is used for input parameters, while 'out' is used
+    for output parameters.\r\n3: 'ref' is used for output parameters, while 'out'
+    is used for input parameters.\r\n4: 'ref' and 'out' are not keywords in C#."
+  answer: 2
+  difficulty: 2
+  learned: 0
+  sampleCode: 
+  hint: Think about how 'ref' and 'out' are used when passing arguments to methods.
+  tags: []
+  explanation: The 'ref' keyword is used for both input and output parameters, while
+    the 'out' keyword is used only for output parameters.

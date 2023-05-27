@@ -1,0 +1,58 @@
+[
+  {
+    "ProgrammingLanguage": 2,
+    "Category": 64,
+    "QuestionPrompt": "What are the access modifiers available in C#?\r\n   1: public, private, protected, internal\r\n   2: public, private, protected\r\n   3: public, private\n   4: public, private, protected, internal, protected internal\r",
+    "Answer": 4,
+    "Difficulty": 2,
+    "Learned": false,
+    "SampleCode": "",
+    "Hint": "Access modifiers control the visibility and accessibility of types and members in C#. Consider the different levels of accessibility in C# when choosing your answer.",
+    "Tags": [],
+    "Explanation": "The access modifiers available in C# are:\r\npublic: The type or member is accessible from any other code in the same assembly or another assembly that references it.\r\nprivate: The type or member is only accessible within the containing type.\r\nprotected: The type or member is accessible within the containing type and derived types.\r\ninternal: The type or member is accessible within the same assembly but not from another assembly.\r\nprotected internal: The type or member is accessible within the same assembly and from derived types in any assembly.",
+    "name": "Access Modifiers",
+    "hideFlags": 0
+  },
+  {
+    "ProgrammingLanguage": 2,
+    "Category": 64,
+    "QuestionPrompt": "What is the difference between the 'ref' and 'out' keywords in C#?\r\n1: 'ref' and 'out' are used interchangeably for both input and output parameters.\r   \r\n2: 'ref' is used for input parameters, while 'out' is used for output parameters.\r\n3: 'ref' is used for output parameters, while 'out' is used for input parameters.\r\n4: 'ref' and 'out' are not keywords in C#.",
+    "Answer": 2,
+    "Difficulty": 2,
+    "Learned": false,
+    "SampleCode": "",
+    "Hint": "Think about how 'ref' and 'out' are used when passing arguments to methods.",
+    "Tags": [],
+    "Explanation": "The 'ref' keyword is used for both input and output parameters, while the 'out' keyword is used only for output parameters.",
+    "name": "Diff Ref and Out",
+    "hideFlags": 0
+  },
+  {
+    "ProgrammingLanguage": 2,
+    "Category": 64,
+    "QuestionPrompt": "What is the difference between value types and reference types in C#?\r\n1: Value types are stored on the heap, while reference types are stored on the stack.\r\n2: Value types and reference types are both stored on the stack.\r\n3: Value types are stored on the stack, while reference types are stored on the heap.\r\n4: Value types and reference types are both stored on the heap.",
+    "Answer": 3,
+    "Difficulty": 2,
+    "Learned": false,
+    "SampleCode": "",
+    "Hint": "Think about how value types and reference types are stored and passed in memory.",
+    "Tags": [],
+    "Explanation": "Value types are stored on the stack and contain the actual data, while reference types are stored on the heap and contain a reference to the data.",
+    "name": "Diff Ref and Value Types",
+    "hideFlags": 0
+  },
+  {
+    "ProgrammingLanguage": 2,
+    "Category": 64,
+    "QuestionPrompt": "What is the correct syntax to output \"Hello World\" in C#\n1: Console.WriteLine(\"Hello World\");\n2: print (\"Hello World\");\n3: System.out.println(\"Hello World\");\n4: cout << \"Hello World\";",
+    "Answer": 1,
+    "Difficulty": 1,
+    "Learned": false,
+    "SampleCode": "",
+    "Hint": "Remember C# best practices is defining methods Pascal Case like MethodName so which of these answers fit that criteria?",
+    "Tags": [],
+    "Explanation": "We are accessing the Console class and the WriteLine method to print out to the console.",
+    "name": "Hello World",
+    "hideFlags": 0
+  }
+]

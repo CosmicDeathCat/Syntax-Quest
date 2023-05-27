@@ -1,0 +1,45 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e59e10e3d3b0e648baf502008a74ac1, type: 3}
+  m_Name: Access Modifiers
+  m_EditorClassIdentifier: 
+  programmingLanguage: 2
+  category: 64
+  questionPrompt: "What are the access modifiers available in C#?\r\n   1: public,
+    private, protected, internal\r\n   2: public, private, protected\r\n   3: public,
+    private\n   4: public, private, protected, internal, protected internal\r"
+  answer: 4
+  difficulty: 2
+  learned: 0
+  sampleCode: 
+  hint: Access modifiers control the visibility and accessibility of types and members
+    in C#. Consider the different levels of accessibility in C# when choosing your
+    answer.
+  tags: []
+  explanation: 'The access modifiers available in C# are:
+
+    public: The type
+    or member is accessible from any other code in the same assembly or another assembly
+    that references it.
+
+    private: The type or member is only accessible within
+    the containing type.
+
+    protected: The type or member is accessible within
+    the containing type and derived types.
+
+    internal: The type or member is
+    accessible within the same assembly but not from another assembly.
+
+    protected
+    internal: The type or member is accessible within the same assembly and from
+    derived types in any assembly.'
