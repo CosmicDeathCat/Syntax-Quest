@@ -12,21 +12,24 @@ public class PopupDisplayUI : MonoBehaviour
 {
     public static PopupDisplayUI instance;
 
-    [SerializeField] private GameObject confirmDialog, optionsDialog;
+    [SerializeField] private GameObject confirmDialog, optionsDialog, textDialog;
     
-    [SerializeField] private TMP_Text confimPopupText, optionsPopupText;
+    [SerializeField] private TMP_Text confimPopupText, optionsPopupText, textPopupText;
 
-    [SerializeField] private Button confirmButton, cancelButton, option1Button, option2Button, option3Button, option4Button;
+    [SerializeField] private Button confirmButton, cancelButton, option1Button, option2Button, option3Button, option4Button, okButton;
     public GameObject ConfirmDialog { get => confirmDialog; set => confirmDialog = value; }
     public GameObject OptionsDialog { get => optionsDialog; set => optionsDialog = value; }
+    public GameObject TextDialog { get => textDialog; set => textDialog = value; }
     public TMP_Text PopupText { get => confimPopupText; set => confimPopupText = value; }
     public TMP_Text OptionsPopupText { get => optionsPopupText; set => optionsPopupText = value; }
+    public TMP_Text tTextPopupText { get => textPopupText; set => textPopupText = value; }
     public Button ConfirmButton { get => confirmButton; set => confirmButton = value; }
     public Button CancelButton { get => cancelButton; set => cancelButton = value; }
     public Button Option1Button { get => option1Button; set => option1Button = value; }
     public Button Option2Button { get => option2Button; set => option2Button = value; }
     public Button Option3Button { get => option3Button; set => option3Button = value; }
     public Button Option4Button { get => option4Button; set => option4Button = value; }
+    public Button OkButton { get => okButton; set => okButton = value; }
     
     private void Awake()
     {
@@ -85,6 +88,16 @@ public class PopupDisplayUI : MonoBehaviour
             option4Button.gameObject.SetActive(false);
         }
     }
+    public void ShowTextPopup(string text, UnityAction okAction = null)
+    {
+        textDialog.gameObject.SetActive(true);
+        textPopupText.text = text;
+        if(okButton != null)
+        {
+            okButton.onClick.AddListener(okAction);
+            okButton.onClick.AddListener(HideTextDialog);
+        }
+    }
     
     public void ShowConfirmPopup(string text, UnityAction confirmAction = null, UnityAction cancelAction = null)
     {
@@ -138,5 +151,11 @@ public class PopupDisplayUI : MonoBehaviour
         option2Button.onClick.RemoveAllListeners();
         option3Button.onClick.RemoveAllListeners();
         option4Button.onClick.RemoveAllListeners();
+    }
+
+    public void HideTextDialog()
+    {
+        textDialog.SetActive(false);
+        okButton.onClick.RemoveAllListeners();
     }
 }

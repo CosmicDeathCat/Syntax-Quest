@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Diff Ref and Value Types
   m_EditorClassIdentifier: 
   programmingLanguage: 2
-  category: 64
+  category: 0
   questionPrompt: 'What is the difference between value types and reference types
     in C#?
 
@@ -30,10 +30,10 @@ MonoBehaviour:
     on the heap.'
   answer: 3
   difficulty: 2
-  learned: 0
   sampleCode: 
   hint: Think about how value types and reference types are stored and passed in
     memory.
   tags: []
   explanation: Value types are stored on the stack and contain the actual data, while
     reference types are stored on the heap and contain a reference to the data.
+  learned: 0

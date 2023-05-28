@@ -1,17 +1,20 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Newtonsoft.Json;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
 public class BaseEnemy : MonoBehaviour
 {
+    [SerializeField] private int promptDifficulty = 1;
     private void OnTriggerEnter2D(Collider2D col)
     {
         if (col.CompareTag("Player"))
         {
-            var randomPrompt = CodePromptGenerator.Instance.CsharpPrompts[Random.Range(0, CodePromptGenerator.Instance.CsharpPrompts.Count)];
+            var learningPrompt = CodePromptGenerator.Instance.CsharpPrompts.Select(x=> x).Where(x=> x.Learned && x.Difficulty <= promptDifficulty).ToList();
+            var randomPrompt = learningPrompt[Random.Range(0, learningPrompt.Count)];
             PopupDisplayUI.instance.ShowOptionsPopup(randomPrompt.QuestionPrompt, () =>
             {
                 if (randomPrompt.Answer == 1)

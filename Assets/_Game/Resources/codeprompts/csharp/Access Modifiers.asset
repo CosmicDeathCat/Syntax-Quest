@@ -13,13 +13,12 @@ MonoBehaviour:
   m_Name: Access Modifiers
   m_EditorClassIdentifier: 
   programmingLanguage: 2
-  category: 64
+  category: 0
   questionPrompt: "What are the access modifiers available in C#?\r\n   1: public,
     private, protected, internal\r\n   2: public, private, protected\r\n   3: public,
     private\n   4: public, private, protected, internal, protected internal\r"
   answer: 4
-  difficulty: 2
-  learned: 0
+  difficulty: 1
   sampleCode: 
   hint: Access modifiers control the visibility and accessibility of types and members
     in C#. Consider the different levels of accessibility in C# when choosing your
@@ -43,3 +42,4 @@ MonoBehaviour:
     protected
     internal: The type or member is accessible within the same assembly and from
     derived types in any assembly.'
+  learned: 0

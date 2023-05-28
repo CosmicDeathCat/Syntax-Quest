@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Diff Ref and Out
   m_EditorClassIdentifier: 
   programmingLanguage: 2
-  category: 64
+  category: 0
   questionPrompt: "What is the difference between the 'ref' and 'out' keywords in
     C#?\r\n1: 'ref' and 'out' are used interchangeably for both input and output
     parameters.\r   \r\n2: 'ref' is used for input parameters, while 'out' is used
@@ -21,9 +21,9 @@ MonoBehaviour:
     is used for input parameters.\r\n4: 'ref' and 'out' are not keywords in C#."
   answer: 2
   difficulty: 2
-  learned: 0
   sampleCode: 
   hint: Think about how 'ref' and 'out' are used when passing arguments to methods.
   tags: []
   explanation: The 'ref' keyword is used for both input and output parameters, while
     the 'out' keyword is used only for output parameters.
+  learned: 0

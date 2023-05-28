@@ -27,10 +27,12 @@ MonoBehaviour:
     4: cout << "Hello World";'
   answer: 1
   difficulty: 1
-  learned: 0
   sampleCode: 
   hint: Remember C# best practices is defining methods Pascal Case like MethodName
     so which of these answers fit that criteria?
   tags: []
-  explanation: We are accessing the Console class and the WriteLine method to print
-    out to the console.
+  explanation: In C#, the Console class provides a set of methods for interacting
+    with the console window, and WriteLine is one of those methods used to display
+    text on the console. The text to be displayed is enclosed within double quotes
+    as a string literal, in this case, "Hello World".
+  learned: 0
