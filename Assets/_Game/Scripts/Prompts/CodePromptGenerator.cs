@@ -31,8 +31,8 @@ public class CodePromptGenerator : MonoBehaviour
     
     public List<CodePrompt> AllCodePrompts { get => allCodePrompts; set => allCodePrompts = value; }
     public List<CodePrompt> CPrompts { get => cPrompts; set => cPrompts = value; }
-    public List<CodePrompt> CPPPrompts { get => cppPrompts; set => cppPrompts = value; }
-    public List<CodePrompt> CsharpPrompts { get => csharpPrompts; set => csharpPrompts = value; }
+    public List<CodePrompt> CppPrompts { get => cppPrompts; set => cppPrompts = value; }
+    public List<CodePrompt> CSharpPrompts { get => csharpPrompts; set => csharpPrompts = value; }
     public List<CodePrompt> CssPrompts { get => cssPrompts; set => cssPrompts = value; }
     public List<CodePrompt> GoPrompts { get => goPrompts; set => goPrompts = value; }
     public List<CodePrompt> HtmlPrompts { get => htmlPrompts; set => htmlPrompts = value; }

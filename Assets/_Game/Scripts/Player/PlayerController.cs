@@ -9,6 +9,8 @@ public class PlayerController : MonoBehaviour
 {
     [SerializeField] private float moveSpeed = 1;
     [SerializeField] private LayerMask objectLayerMask;
+    [SerializeField] private ProgrammingLanguages availableLanguages;
+    [SerializeField] private ProgrammingLanguages currentLanguage;
     private Tilemap objectLayerTilemap;
     private Tilemap objectUnderPlayerTilemap;
     private Animator anim;
@@ -16,6 +18,12 @@ public class PlayerController : MonoBehaviour
     private Vector2 movement;
     private PlayerInputActions playerInput;
     public static Action<bool> OnPaused;
+
+    public float MoveSpeed { get => moveSpeed; set => moveSpeed = value; }
+    public LayerMask ObjectLayerMask { get => objectLayerMask; set => objectLayerMask = value; }
+    public ProgrammingLanguages AvailableLanguages { get => availableLanguages; set => availableLanguages = value; }
+    public ProgrammingLanguages CurrentLanguage { get => currentLanguage; set => currentLanguage = value; }
+
     private void Awake()
     {
         playerInput = new PlayerInputActions();
