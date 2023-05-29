@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Mathematics;
@@ -14,6 +15,7 @@ public class PlayerController : MonoBehaviour
     private SpriteRenderer sr;
     private Vector2 movement;
     private PlayerInputActions playerInput;
+    public static Action<bool> OnPaused;
     private void Awake()
     {
         playerInput = new PlayerInputActions();
@@ -21,12 +23,14 @@ public class PlayerController : MonoBehaviour
         sr = GetComponent<SpriteRenderer>();
         objectLayerTilemap = GameObject.Find("Object").GetComponent<Tilemap>();
         objectUnderPlayerTilemap = GameObject.Find("Object Under Player").GetComponent<Tilemap>();
+
     }
     private void OnEnable()
     {
         playerInput.Enable();
         playerInput.Player.Move.performed += Move_performed;
         playerInput.Player.Move.canceled += Move_canceled;
+        OnPaused += OnPausedHandler;
     }
 
     private void OnDisable()
@@ -34,8 +38,20 @@ public class PlayerController : MonoBehaviour
         playerInput.Disable();
         playerInput.Player.Move.performed -= Move_performed;
         playerInput.Player.Move.canceled -= Move_canceled;
+        OnPaused -= OnPausedHandler;
     }
     
+
+    private void OnPausedHandler(bool paused)
+    {
+        if (paused)
+        {
+            playerInput.Disable();
+        }
+        else
+            playerInput.Enable();
+    }
+
     private void Move_canceled(UnityEngine.InputSystem.InputAction.CallbackContext input)
     {
        movement = Vector2.zero;
@@ -71,4 +87,13 @@ public class PlayerController : MonoBehaviour
       transform.position += (Vector3)movement * moveSpeed;
 
     }
+
+    public static bool Paused(bool isPaused)
+    {
+        OnPaused.Invoke(isPaused);
+        return isPaused;
+    }
+
+
+
 }

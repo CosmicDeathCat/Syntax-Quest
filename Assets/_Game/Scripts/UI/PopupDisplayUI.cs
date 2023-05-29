@@ -50,6 +50,7 @@ public class PopupDisplayUI : MonoBehaviour
         UnityAction option2Action = null, UnityAction option3Action = null, UnityAction option4Action = null)
     {
         optionsDialog.gameObject.SetActive(true);
+        PlayerController.Paused(true);
         optionsPopupText.text = text;
         eventSystem.SetSelectedGameObject(option1Button.gameObject);
         if(option1Action != null)
@@ -96,6 +97,7 @@ public class PopupDisplayUI : MonoBehaviour
     public void ShowTextPopup(string text, UnityAction okAction = null)
     {
         textDialog.gameObject.SetActive(true);
+        PlayerController.Paused(true);
         textPopupText.text = text;
         eventSystem.SetSelectedGameObject(okButton.gameObject);
         if (okButton != null)
@@ -108,6 +110,7 @@ public class PopupDisplayUI : MonoBehaviour
     public void ShowConfirmPopup(string text, UnityAction confirmAction = null, UnityAction cancelAction = null)
     {
         confirmDialog.gameObject.SetActive(true);
+        PlayerController.Paused(true);
         confimPopupText.text = text;
         eventSystem.SetSelectedGameObject(confirmButton.gameObject);
         if (confirmAction != null)
@@ -142,15 +145,19 @@ public class PopupDisplayUI : MonoBehaviour
         option2Button.onClick.RemoveAllListeners();
         option3Button.onClick.RemoveAllListeners();
         option4Button.onClick.RemoveAllListeners();
+        PlayerController.Paused(false);
+
     }
-    
+
     public void HideConfrimDialog()
     {
         confirmDialog.SetActive(false);
         confirmButton.onClick.RemoveAllListeners();
         cancelButton.onClick.RemoveAllListeners();
+        PlayerController.Paused(false);
+
     }
-    
+
     public void HideOptionsDialog()
     {
         optionsDialog.SetActive(false);
@@ -158,11 +165,13 @@ public class PopupDisplayUI : MonoBehaviour
         option2Button.onClick.RemoveAllListeners();
         option3Button.onClick.RemoveAllListeners();
         option4Button.onClick.RemoveAllListeners();
+        PlayerController.Paused(false);
     }
 
     public void HideTextDialog()
     {
         textDialog.SetActive(false);
         okButton.onClick.RemoveAllListeners();
+        PlayerController.Paused(false);
     }
 }
