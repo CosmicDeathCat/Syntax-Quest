@@ -5,7 +5,7 @@ using System.Linq;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public class NpcBase : MonoBehaviour
+public class BaseNpc : MonoBehaviour
 {
     [SerializeField] private int promptDifficulty = 1;
     private void OnTriggerEnter2D(Collider2D col)
