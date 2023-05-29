@@ -54,7 +54,7 @@ public class CodePromptGenerator : MonoBehaviour
         try
         {
             // Get all subdirectories within the Resources folder
-            string[] subdirectories = Directory.GetDirectories(Path.Combine(Application.dataPath, "_Game","Resources", "codeprompts"));
+            string[] subdirectories = Directory.GetDirectories(Path.Combine(Application.dataPath, "_Game","Resources", "CodePrompts"));
 
             foreach (string subdirectory in subdirectories)
             {
@@ -62,7 +62,7 @@ public class CodePromptGenerator : MonoBehaviour
                 string programmingLanguage = Path.GetFileName(subdirectory);
 
                 // Load all CodePrompt objects in the current programming language folder
-                CodePrompt[] prompts = Resources.LoadAll<CodePrompt>("codeprompts/" + programmingLanguage);
+                CodePrompt[] prompts = Resources.LoadAll<CodePrompt>("CodePrompts/" + programmingLanguage);
 
 
                 
