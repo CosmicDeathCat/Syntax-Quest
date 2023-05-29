@@ -6,6 +6,7 @@ using UnityEngine.UI;
 using System;
 using static UnityEngine.UI.Button;
 using UnityEngine.Events;
+using UnityEngine.EventSystems;
 using UnityEngine.Serialization;
 
 public class PopupDisplayUI : MonoBehaviour
@@ -30,7 +31,9 @@ public class PopupDisplayUI : MonoBehaviour
     public Button Option3Button { get => option3Button; set => option3Button = value; }
     public Button Option4Button { get => option4Button; set => option4Button = value; }
     public Button OkButton { get => okButton; set => okButton = value; }
-    
+    private EventSystem eventSystem;
+
+
     private void Awake()
     {
         if (instance != null && instance != this)
@@ -40,13 +43,16 @@ public class PopupDisplayUI : MonoBehaviour
         else
         {
             instance = this;
+            eventSystem = FindObjectOfType<EventSystem>();
         }
     }
     public void ShowOptionsPopup(string text, UnityAction option1Action = null,
         UnityAction option2Action = null, UnityAction option3Action = null, UnityAction option4Action = null)
     {
         optionsDialog.gameObject.SetActive(true);
+        PlayerController.Paused(true);
         optionsPopupText.text = text;
+        eventSystem.SetSelectedGameObject(option1Button.gameObject);
         if(option1Action != null)
         {
             option1Button.onClick.AddListener(option1Action);
@@ -91,8 +97,10 @@ public class PopupDisplayUI : MonoBehaviour
     public void ShowTextPopup(string text, UnityAction okAction = null)
     {
         textDialog.gameObject.SetActive(true);
+        PlayerController.Paused(true);
         textPopupText.text = text;
-        if(okButton != null)
+        eventSystem.SetSelectedGameObject(okButton.gameObject);
+        if (okButton != null)
         {
             okButton.onClick.AddListener(okAction);
             okButton.onClick.AddListener(HideTextDialog);
@@ -102,8 +110,10 @@ public class PopupDisplayUI : MonoBehaviour
     public void ShowConfirmPopup(string text, UnityAction confirmAction = null, UnityAction cancelAction = null)
     {
         confirmDialog.gameObject.SetActive(true);
+        PlayerController.Paused(true);
         confimPopupText.text = text;
-        if(confirmAction != null)
+        eventSystem.SetSelectedGameObject(confirmButton.gameObject);
+        if (confirmAction != null)
         {
             confirmButton.onClick.AddListener(confirmAction);
             confirmButton.onClick.AddListener(HideConfrimDialog);
@@ -135,15 +145,19 @@ public class PopupDisplayUI : MonoBehaviour
         option2Button.onClick.RemoveAllListeners();
         option3Button.onClick.RemoveAllListeners();
         option4Button.onClick.RemoveAllListeners();
+        PlayerController.Paused(false);
+
     }
-    
+
     public void HideConfrimDialog()
     {
         confirmDialog.SetActive(false);
         confirmButton.onClick.RemoveAllListeners();
         cancelButton.onClick.RemoveAllListeners();
+        PlayerController.Paused(false);
+
     }
-    
+
     public void HideOptionsDialog()
     {
         optionsDialog.SetActive(false);
@@ -157,5 +171,6 @@ public class PopupDisplayUI : MonoBehaviour
     {
         textDialog.SetActive(false);
         okButton.onClick.RemoveAllListeners();
+        PlayerController.Paused(false);
     }
 }
