@@ -165,7 +165,6 @@ public class PopupDisplayUI : MonoBehaviour
         option2Button.onClick.RemoveAllListeners();
         option3Button.onClick.RemoveAllListeners();
         option4Button.onClick.RemoveAllListeners();
-       // PlayerController.Paused(false);
     }
 
     public void HideTextDialog()
