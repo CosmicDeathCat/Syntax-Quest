@@ -6,6 +6,7 @@ using UnityEngine.UI;
 using System;
 using static UnityEngine.UI.Button;
 using UnityEngine.Events;
+using UnityEngine.EventSystems;
 using UnityEngine.Serialization;
 
 public class PopupDisplayUI : MonoBehaviour
@@ -30,7 +31,9 @@ public class PopupDisplayUI : MonoBehaviour
     public Button Option3Button { get => option3Button; set => option3Button = value; }
     public Button Option4Button { get => option4Button; set => option4Button = value; }
     public Button OkButton { get => okButton; set => okButton = value; }
-    
+    private EventSystem eventSystem;
+
+
     private void Awake()
     {
         if (instance != null && instance != this)
@@ -40,6 +43,7 @@ public class PopupDisplayUI : MonoBehaviour
         else
         {
             instance = this;
+            eventSystem = FindObjectOfType<EventSystem>();
         }
     }
     public void ShowOptionsPopup(string text, UnityAction option1Action = null,
@@ -47,6 +51,7 @@ public class PopupDisplayUI : MonoBehaviour
     {
         optionsDialog.gameObject.SetActive(true);
         optionsPopupText.text = text;
+        eventSystem.SetSelectedGameObject(option1Button.gameObject);
         if(option1Action != null)
         {
             option1Button.onClick.AddListener(option1Action);
@@ -92,7 +97,8 @@ public class PopupDisplayUI : MonoBehaviour
     {
         textDialog.gameObject.SetActive(true);
         textPopupText.text = text;
-        if(okButton != null)
+        eventSystem.SetSelectedGameObject(okButton.gameObject);
+        if (okButton != null)
         {
             okButton.onClick.AddListener(okAction);
             okButton.onClick.AddListener(HideTextDialog);
@@ -103,7 +109,8 @@ public class PopupDisplayUI : MonoBehaviour
     {
         confirmDialog.gameObject.SetActive(true);
         confimPopupText.text = text;
-        if(confirmAction != null)
+        eventSystem.SetSelectedGameObject(confirmButton.gameObject);
+        if (confirmAction != null)
         {
             confirmButton.onClick.AddListener(confirmAction);
             confirmButton.onClick.AddListener(HideConfrimDialog);
