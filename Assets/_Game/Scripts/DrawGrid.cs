@@ -11,6 +11,17 @@ public class DrawGrid : MonoBehaviour
     [SerializeField] private Vector2 offset;
     private Tilemap tileMap;
 
+    private void OnEnable()
+    {
+        PlayerPrefsPlus.OnPrefChanged += OnPrefChanged;
+        
+    }
+
+    private void OnDisable()
+    {
+        PlayerPrefsPlus.OnPrefChanged -= OnPrefChanged;
+    }
+
     private void Awake()
     {
         if (tileMap == null)
@@ -21,7 +32,11 @@ public class DrawGrid : MonoBehaviour
 
     private void Start()
     {
-        GenerateGrid();
+        var gridOverlay = (bool)PlayerPrefsDB.instance.PlayerPrefsPlus.Get(Prefs.EnableGridOverlay);
+        if (gridOverlay)
+        {
+            GenerateGrid();
+        }
     }
 
     public void GenerateGrid()
@@ -33,6 +48,36 @@ public class DrawGrid : MonoBehaviour
                 var spawnPosition = new Vector3(x + offset.x, y + offset.y);
                 var spawnedTile = Instantiate(gridTilePrefab, spawnPosition, quaternion.identity, tileMap.transform);
                 spawnedTile.name = $"Tile ({x},{y})";
+            }
+        }
+    }
+
+    public void DestroyGrid()
+    {
+        if (tileMap.transform.childCount > 0)
+        {
+            for (int i = tileMap.transform.childCount -1 ; i >= 0; i--)
+            {
+                var child = tileMap.transform.GetChild(i);
+                if (child.name.Contains("Tile"))
+                {
+                    Destroy(child.gameObject);
+                }
+            }
+        }
+    }
+    
+    private void OnPrefChanged(Dictionary<string, object> obj)
+    {
+        if (obj.ContainsKey(Prefs.EnableGridOverlay))
+        {
+            if ((bool)obj[Prefs.EnableGridOverlay])
+            {
+                GenerateGrid();
+            }
+            else
+            {
+                DestroyGrid();
             }
         }
     }
