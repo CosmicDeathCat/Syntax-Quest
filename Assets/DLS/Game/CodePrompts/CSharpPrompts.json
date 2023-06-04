@@ -1,0 +1,58 @@
+[
+  {
+    "ProgrammingLanguage": 8,
+    "Category": 8,
+    "QuestionPrompt": "What are the access modifiers available in C#?\r\n1: public, private, protected, internal\r\n2: public, private, protected\r\n3: public, private\n4: public, private, protected, internal, protected internal\r",
+    "Answer": 4,
+    "Difficulty": 1,
+    "SampleCode": "",
+    "Hint": "Access modifiers control the visibility and accessibility of types and members in C#. Consider the different levels of accessibility in C# when choosing your answer.",
+    "Tags": [],
+    "Explanation": "The access modifiers available in C# are:\npublic: The type or member is accessible from any other code in the same assembly or another assembly that references it.\nprivate: The type or member is only accessible within the containing type.\nprotected: The type or member is accessible within the containing type and derived types.\ninternal: The type or member is accessible within the same assembly but not from another assembly.\nprotected internal: The type or member is accessible within the same assembly and from derived types in any assembly.",
+    "Learned": true,
+    "name": "D1 Access Modifiers",
+    "hideFlags": 0
+  },
+  {
+    "ProgrammingLanguage": 8,
+    "Category": 64,
+    "QuestionPrompt": "What is the correct syntax to output \"Hello World\" in C#\n1: Console.WriteLine(\"Hello World\");\n2: print (\"Hello World\");\n3: System.out.println(\"Hello World\");\n4: cout << \"Hello World\";",
+    "Answer": 1,
+    "Difficulty": 1,
+    "SampleCode": "",
+    "Hint": "Remember C# best practices is defining methods Pascal Case like MethodName so which of these answers fit that criteria?",
+    "Tags": [],
+    "Explanation": "In C#, the Console class provides a set of methods for interacting with the console window, and WriteLine is one of those methods used to display text on the console. The text to be displayed is enclosed within double quotes as a string literal, in this case, \"Hello World\".",
+    "Learned": false,
+    "name": "D1 Hello World",
+    "hideFlags": 0
+  },
+  {
+    "ProgrammingLanguage": 8,
+    "Category": 0,
+    "QuestionPrompt": "What is the difference between the 'ref' and 'out' keywords in C#?\r\n1: 'ref' and 'out' are used interchangeably for both input and output parameters.\r   \r\n2: 'ref' is used for input parameters, while 'out' is used for output parameters.\r\n3: 'ref' is used for output parameters, while 'out' is used for input parameters.\r\n4: 'ref' and 'out' are not keywords in C#.",
+    "Answer": 2,
+    "Difficulty": 2,
+    "SampleCode": "",
+    "Hint": "Think about how 'ref' and 'out' are used when passing arguments to methods.",
+    "Tags": [],
+    "Explanation": "The 'ref' keyword is used for both input and output parameters, while the 'out' keyword is used only for output parameters.",
+    "Learned": false,
+    "name": "D2 Diff Ref and Out",
+    "hideFlags": 0
+  },
+  {
+    "ProgrammingLanguage": 8,
+    "Category": 0,
+    "QuestionPrompt": "What is the difference between value types and reference types in C#?\n1: Value types are stored on the heap, while reference types are stored on the stack.\n2: Value types and reference types are both stored on the stack.\n3: Value types are stored on the stack, while reference types are stored on the heap.\n4: Value types and reference types are both stored on the heap.",
+    "Answer": 3,
+    "Difficulty": 2,
+    "SampleCode": "",
+    "Hint": "Think about how value types and reference types are stored and passed in memory.",
+    "Tags": [],
+    "Explanation": "Value types are stored on the stack and contain the actual data, while reference types are stored on the heap and contain a reference to the data.",
+    "Learned": false,
+    "name": "D2 Diff Ref and Value Types",
+    "hideFlags": 0
+  }
+]
