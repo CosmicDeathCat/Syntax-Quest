@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e59e10e3d3b0e648baf502008a74ac1, type: 3}
+  m_Name: D3 Interface
+  m_EditorClassIdentifier: 
+  <ProgrammingLanguage>k__BackingField: 8
+  <Category>k__BackingField: 8
+  <QuestionPrompt>k__BackingField: What is an interface in C#?
+  <Options>k__BackingField:
+  - <Text>k__BackingField: A class that can't be instantiated.
+    <IsAnswer>k__BackingField: 0
+  - <Text>k__BackingField: A class with only abstract methods.
+    <IsAnswer>k__BackingField: 1
+  - <Text>k__BackingField: A class with only virtual methods.
+    <IsAnswer>k__BackingField: 0
+  - <Text>k__BackingField: A class with only sealed methods.
+    <IsAnswer>k__BackingField: 0
+  <Difficulty>k__BackingField: 3
+  <SampleCode>k__BackingField: 
+  <Hint>k__BackingField: Consider the purpose and usage of interfaces in C#.
+  <Tags>k__BackingField:
+  - keywords
+  - class
+  - interface
+  <Explanation>k__BackingField: In C#, an interface is like an abstract class with
+    only abstract methods. It's a contract for a class that guarantees specific functionality.
+  <Learned>k__BackingField: 0

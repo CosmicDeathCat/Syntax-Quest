@@ -9,84 +9,15 @@ namespace DLS.Game.Scripts.Prompts
     [CreateAssetMenu(fileName = "CodePrompt", menuName = "DLS/Code Prompt")]
     public class CodePrompt : ScriptableObject
     {
-        [SerializeField] protected ProgrammingLanguages programmingLanguage;
-
-        [SerializeField] protected ProgrammingCategories category;
-
-        [SerializeField, TextArea(10, 50)] protected string questionPrompt;
-
-        [SerializeField] protected int answer;
-
-        [SerializeField] protected int difficulty;
-
-        [SerializeField, TextArea(10, 50)] protected string sampleCode;
-
-        [SerializeField, TextArea(10, 50)] protected string hint;
-
-        [SerializeField] protected List<string> tags;
-
-        [SerializeField, TextArea(10, 50)] protected string explanation;
-
-        [SerializeField] protected bool learned;
-
-        public ProgrammingLanguages ProgrammingLanguage
-        {
-            get => programmingLanguage;
-            set => programmingLanguage = value;
-        }
-
-        public ProgrammingCategories Category
-        {
-            get => category;
-            set => category = value;
-        }
-
-        public string QuestionPrompt
-        {
-            get => questionPrompt;
-            set => questionPrompt = value;
-        }
-
-        public int Answer
-        {
-            get => answer;
-            set => answer = value;
-        }
-
-        public int Difficulty
-        {
-            get => difficulty;
-            set => difficulty = value;
-        }
-
-        public string SampleCode
-        {
-            get => sampleCode;
-            set => sampleCode = value;
-        }
-
-        public string Hint
-        {
-            get => hint;
-            set => hint = value;
-        }
-
-        public List<string> Tags
-        {
-            get => tags;
-            set => tags = value;
-        }
-
-        public string Explanation
-        {
-            get => explanation;
-            set => explanation = value;
-        }
-
-        public bool Learned
-        {
-            get => learned;
-            set => learned = value;
-        }
+        [field: SerializeField] public ProgrammingLanguages ProgrammingLanguage { get; set; }
+        [field: SerializeField] public ProgrammingCategories Category { get; set; }
+        [field: SerializeField] public string QuestionPrompt { get; set; }
+        [field: SerializeField] public List<QuizOption> Options { get; set; }
+        [field: SerializeField] public int Difficulty { get; set; }
+        [field: SerializeField] public string SampleCode { get; set; }
+        [field: SerializeField] public string Hint { get; set; }
+        [field: SerializeField] public List<string> Tags { get; set; }
+        [field: SerializeField] public string Explanation { get; set; }
+        [field: SerializeField] public bool Learned { get; set; }
     }
 }

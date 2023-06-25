@@ -1,6 +1,10 @@
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 using DLS.Dialogue;
 using DLS.Game.Scripts.Messages;
 using DLS.Game.Scripts.Player;
+using DLS.Game.Scripts.Prompts;
 using DLS.Utilities;
 using TMPro;
 using UnityEngine;
@@ -120,64 +124,61 @@ namespace DLS.Game.Scripts.UI
             }
         }
 
-        public void ShowOptionsPopup(string text, UnityAction option1Action = null,
-            UnityAction option2Action = null, UnityAction option3Action = null, UnityAction option4Action = null)
+        public void ShowOptionsPopup(string text, List<QuizOption> options)
         {
             optionsDialog.gameObject.SetActive(true);
             MessageSystem.MessageManager.SendImmediate(MessageChannels.GameFlow, new PauseMessage(true));
-            FloatingDPad.JoystickEnable(false);
-            optionsPopupText.text = text;
-            eventSystem.SetSelectedGameObject(option1Button.gameObject);
-            if (option1Action != null)
-            {
-                option1Button.onClick.AddListener(option1Action);
-                option1Button.onClick.AddListener(HideOptionsDialog);
-                option1Button.gameObject.SetActive(true);
-            }
-            else
-            {
-                option1Button.gameObject.SetActive(false);
-            }
+            MessageSystem.MessageManager.SendImmediate(MessageChannels.UI, new JoystickEnableMessage(false));
 
-            if (option2Action != null)
+            // Shuffle the options
+            System.Random rng = new System.Random();
+            options = options.OrderBy(a => rng.Next()).ToList();
+
+            // Adding the options text to the question prompt
+            StringBuilder sb = new StringBuilder(text);
+            for (int i = 0; i < options.Count; i++)
             {
-                option2Button.onClick.AddListener(option2Action);
+                sb.Append($"\n{i+1}. {options[i].Text}");
+            }
+            // Set the text
+            optionsPopupText.text = sb.ToString();
+
+            eventSystem.SetSelectedGameObject(option1Button.gameObject);
+
+            // Configure the buttons
+            
+            option1Button.onClick.AddListener(() => { PopupDisplayUI.instance.ShowConfirmPopup(options[0].IsAnswer ? "CORRECT!" : "INCORRECT!", () => { }); });
+            option1Button.onClick.AddListener(HideOptionsDialog);
+            option1Button.gameObject.SetActive(true);
+
+            if (options.Count >= 2)
+            {
+                option2Button.onClick.AddListener(() => { PopupDisplayUI.instance.ShowConfirmPopup(options[1].IsAnswer ? "CORRECT!" : "INCORRECT!", () => { }); });
                 option2Button.onClick.AddListener(HideOptionsDialog);
                 option2Button.gameObject.SetActive(true);
             }
-            else
-            {
-                option2Button.gameObject.SetActive(false);
-            }
 
-            if (option3Action != null)
+            if (options.Count >= 3)
             {
-                option3Button.onClick.AddListener(option3Action);
+                option3Button.onClick.AddListener(() => { PopupDisplayUI.instance.ShowConfirmPopup(options[2].IsAnswer ? "CORRECT!" : "INCORRECT!", () => { }); });
                 option3Button.onClick.AddListener(HideOptionsDialog);
                 option3Button.gameObject.SetActive(true);
             }
-            else
-            {
-                option3Button.gameObject.SetActive(false);
-            }
 
-            if (option4Action != null)
+            if (options.Count >= 4)
             {
-                option4Button.onClick.AddListener(option4Action);
+                option4Button.onClick.AddListener(() => { PopupDisplayUI.instance.ShowConfirmPopup(options[3].IsAnswer ? "CORRECT!" : "INCORRECT!", () => { }); });
                 option4Button.onClick.AddListener(HideOptionsDialog);
                 option4Button.gameObject.SetActive(true);
             }
-            else
-            {
-                option4Button.gameObject.SetActive(false);
-            }
         }
+
 
         public void ShowTextPopup(string text, UnityAction okAction = null)
         {
             textDialog.gameObject.SetActive(true);
             MessageSystem.MessageManager.SendImmediate(MessageChannels.GameFlow, new PauseMessage(true));
-            FloatingDPad.JoystickEnable(false);
+            MessageSystem.MessageManager.SendImmediate(MessageChannels.UI, new JoystickEnableMessage(false));
             textPopupText.text = text;
             eventSystem.SetSelectedGameObject(okButton.gameObject);
             if (okButton != null)
@@ -191,7 +192,7 @@ namespace DLS.Game.Scripts.UI
         {
             confirmDialog.gameObject.SetActive(true);
             MessageSystem.MessageManager.SendImmediate(MessageChannels.GameFlow, new PauseMessage(true));
-            FloatingDPad.JoystickEnable(false);
+            MessageSystem.MessageManager.SendImmediate(MessageChannels.UI, new JoystickEnableMessage(false));
             confimPopupText.text = text;
             eventSystem.SetSelectedGameObject(confirmButton.gameObject);
             if (confirmAction != null)
@@ -228,7 +229,7 @@ namespace DLS.Game.Scripts.UI
             option3Button.onClick.RemoveAllListeners();
             option4Button.onClick.RemoveAllListeners();
             MessageSystem.MessageManager.SendImmediate(MessageChannels.GameFlow, new PauseMessage(false));
-            FloatingDPad.JoystickEnable(true);
+            MessageSystem.MessageManager.SendImmediate(MessageChannels.UI, new JoystickEnableMessage(true));
         }
 
         public void HideConfrimDialog()
@@ -237,7 +238,7 @@ namespace DLS.Game.Scripts.UI
             confirmButton.onClick.RemoveAllListeners();
             cancelButton.onClick.RemoveAllListeners();
             MessageSystem.MessageManager.SendImmediate(MessageChannels.GameFlow, new PauseMessage(false));
-            FloatingDPad.JoystickEnable(true);
+            MessageSystem.MessageManager.SendImmediate(MessageChannels.UI, new JoystickEnableMessage(true));
         }
 
         public void HideOptionsDialog()
@@ -254,7 +255,7 @@ namespace DLS.Game.Scripts.UI
             textDialog.SetActive(false);
             okButton.onClick.RemoveAllListeners();
             MessageSystem.MessageManager.SendImmediate(MessageChannels.GameFlow, new PauseMessage(false));
-            FloatingDPad.JoystickEnable(true);
+            MessageSystem.MessageManager.SendImmediate(MessageChannels.UI, new JoystickEnableMessage(true));
         }
     }
 }

@@ -14,10 +14,10 @@ namespace DLS.Game.Scripts.Player
 {
     public class PlayerController : ActorController
     {
-        [SerializeField] private float moveSpeed = 1;
-        [SerializeField] private LayerMask objectLayerMask;
-        [SerializeField] private ProgrammingLanguages availableLanguages;
-        [SerializeField] private ProgrammingLanguages currentLanguage;
+        [field: SerializeField] public float MoveSpeed = 1;
+        [field: SerializeField] public LayerMask ObjectLayerMask;
+        [field: SerializeField] public ProgrammingLanguages AvailableLanguages;
+        [field: SerializeField] public ProgrammingLanguages CurrentLanguage;
         private Tilemap objectLayerTilemap;
         private Tilemap objectUnderPlayerTilemap;
         private Animator anim;
@@ -30,30 +30,6 @@ namespace DLS.Game.Scripts.Player
         private TileBase objectTile;
         private TileBase objectUnderPlayerTile;
         private Collider2D colliderAtPos;
-        
-        public float MoveSpeed
-        {
-            get => moveSpeed;
-            set => moveSpeed = value;
-        }
-
-        public LayerMask ObjectLayerMask
-        {
-            get => objectLayerMask;
-            set => objectLayerMask = value;
-        }
-
-        public ProgrammingLanguages AvailableLanguages
-        {
-            get => availableLanguages;
-            set => availableLanguages = value;
-        }
-
-        public ProgrammingLanguages CurrentLanguage
-        {
-            get => currentLanguage;
-            set => currentLanguage = value;
-        }
 
         private void Awake()
         {
@@ -86,21 +62,21 @@ namespace DLS.Game.Scripts.Player
             playerInput.Player.Interact.performed -= Interact_performed;
         }
 
-        private void Move_canceled(UnityEngine.InputSystem.InputAction.CallbackContext input)
+        private void Move_canceled(InputAction.CallbackContext input)
         {
             movement = Vector2.zero;
         }
 
-        private void Move_performed(UnityEngine.InputSystem.InputAction.CallbackContext input)
+        private void Move_performed(InputAction.CallbackContext input)
         {
             movement = input.ReadValue<Vector2>().normalized;
-            pos = movement * moveSpeed;
+            pos = movement * MoveSpeed;
 
             objectTile = objectLayerTilemap.GetTile(
                     objectLayerTilemap.WorldToCell(transform.position + new Vector3(-0.5f, -0.5f) + (Vector3)pos));
             objectUnderPlayerTile = objectUnderPlayerTilemap.GetTile(
                 objectUnderPlayerTilemap.WorldToCell(transform.position + new Vector3(-0.5f, -0.5f) + (Vector3)pos));
-            colliderAtPos = Physics2D.OverlapPoint(transform.position + (Vector3)pos, objectLayerMask);
+            colliderAtPos = Physics2D.OverlapPoint(transform.position + (Vector3)pos, ObjectLayerMask);
 
             // Update the character rotation based on the movement direction
             if (movement.y > 0)
@@ -124,7 +100,7 @@ namespace DLS.Game.Scripts.Player
             Vector3 newPosition = transform.position + (Vector3)pos;
 
             if (objectTile != null || objectUnderPlayerTile != null ||
-                Physics2D.OverlapPoint(newPosition, objectLayerMask) != null)
+                Physics2D.OverlapPoint(newPosition, ObjectLayerMask) != null)
             {
                 return;
             }

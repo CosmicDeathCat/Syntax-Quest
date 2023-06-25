@@ -436,14 +436,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c388d12f15e64e4b9a05a16542201ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  joystick: {fileID: 7583827267396791609}
-  objectLayerMask:
+  Joystick: {fileID: 7583827267396791609}
+  ObjectLayerMask:
     serializedVersion: 2
     m_Bits: 8
-  upButton: {fileID: 7583827268655362154}
-  rightButton: {fileID: 7583827269300620883}
-  downButton: {fileID: 7583827267645573304}
-  leftButton: {fileID: 7583827268902459296}
+  UpButton: {fileID: 7583827268655362154}
+  RightButton: {fileID: 7583827269300620883}
+  DownButton: {fileID: 7583827267645573304}
+  LeftButton: {fileID: 7583827268902459296}
 --- !u!1 &7583827268902459298
 GameObject:
   m_ObjectHideFlags: 0

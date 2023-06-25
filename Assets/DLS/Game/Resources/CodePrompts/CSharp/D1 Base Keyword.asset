@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e59e10e3d3b0e648baf502008a74ac1, type: 3}
+  m_Name: D1 Base Keyword
+  m_EditorClassIdentifier: 
+  <ProgrammingLanguage>k__BackingField: 8
+  <Category>k__BackingField: 8
+  <QuestionPrompt>k__BackingField: Which keyword is used to inherit from a base class
+    in C#?
+  <Options>k__BackingField:
+  - <Text>k__BackingField: super
+    <IsAnswer>k__BackingField: 0
+  - <Text>k__BackingField: extends
+    <IsAnswer>k__BackingField: 0
+  - <Text>k__BackingField: inherits
+    <IsAnswer>k__BackingField: 0
+  - <Text>k__BackingField: base
+    <IsAnswer>k__BackingField: 1
+  <Difficulty>k__BackingField: 1
+  <SampleCode>k__BackingField: 
+  <Hint>k__BackingField: Think about how we define a class is a 'child' of another
+    class.
+  <Tags>k__BackingField:
+  - inheritance
+  - keywords
+  <Explanation>k__BackingField: In C#, the 'base' keyword is used to access members
+    of the base class from within a derived class.
+  <Learned>k__BackingField: 0

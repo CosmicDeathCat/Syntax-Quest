@@ -2,57 +2,156 @@
   {
     "ProgrammingLanguage": 8,
     "Category": 8,
-    "QuestionPrompt": "What are the access modifiers available in C#?\r\n1: public, private, protected, internal\r\n2: public, private, protected\r\n3: public, private\n4: public, private, protected, internal, protected internal\r",
-    "Answer": 4,
+    "QuestionPrompt": "Which keyword is used to inherit from a base class in C#?",
+    "Options": [
+      {
+        "Text": "super",
+        "Action": null,
+        "IsAnswer": false
+      },
+      {
+        "Text": "extends",
+        "Action": null,
+        "IsAnswer": false
+      },
+      {
+        "Text": "inherits",
+        "Action": null,
+        "IsAnswer": false
+      },
+      {
+        "Text": "base",
+        "Action": null,
+        "IsAnswer": true
+      }
+    ],
     "Difficulty": 1,
     "SampleCode": "",
-    "Hint": "Access modifiers control the visibility and accessibility of types and members in C#. Consider the different levels of accessibility in C# when choosing your answer.",
-    "Tags": [],
-    "Explanation": "The access modifiers available in C# are:\npublic: The type or member is accessible from any other code in the same assembly or another assembly that references it.\nprivate: The type or member is only accessible within the containing type.\nprotected: The type or member is accessible within the containing type and derived types.\ninternal: The type or member is accessible within the same assembly but not from another assembly.\nprotected internal: The type or member is accessible within the same assembly and from derived types in any assembly.",
+    "Hint": "Think about how we define a class is a 'child' of another class.",
+    "Tags": [
+      "inheritance",
+      "keywords"
+    ],
+    "Explanation": "In C#, the 'base' keyword is used to access members of the base class from within a derived class.",
     "Learned": true,
-    "name": "D1 Access Modifiers",
+    "name": "D1 Base Keyword",
     "hideFlags": 0
   },
   {
     "ProgrammingLanguage": 8,
-    "Category": 64,
-    "QuestionPrompt": "What is the correct syntax to output \"Hello World\" in C#\n1: Console.WriteLine(\"Hello World\");\n2: print (\"Hello World\");\n3: System.out.println(\"Hello World\");\n4: cout << \"Hello World\";",
-    "Answer": 1,
-    "Difficulty": 1,
-    "SampleCode": "",
-    "Hint": "Remember C# best practices is defining methods Pascal Case like MethodName so which of these answers fit that criteria?",
-    "Tags": [],
-    "Explanation": "In C#, the Console class provides a set of methods for interacting with the console window, and WriteLine is one of those methods used to display text on the console. The text to be displayed is enclosed within double quotes as a string literal, in this case, \"Hello World\".",
-    "Learned": false,
-    "name": "D1 Hello World",
-    "hideFlags": 0
-  },
-  {
-    "ProgrammingLanguage": 8,
-    "Category": 0,
-    "QuestionPrompt": "What is the difference between the 'ref' and 'out' keywords in C#?\r\n1: 'ref' and 'out' are used interchangeably for both input and output parameters.\r   \r\n2: 'ref' is used for input parameters, while 'out' is used for output parameters.\r\n3: 'ref' is used for output parameters, while 'out' is used for input parameters.\r\n4: 'ref' and 'out' are not keywords in C#.",
-    "Answer": 2,
+    "Category": 8,
+    "QuestionPrompt": "In C#, what does the 'sealed' keyword do?",
+    "Options": [
+      {
+        "Text": "It prevents a class from being instantiated.",
+        "Action": null,
+        "IsAnswer": false
+      },
+      {
+        "Text": "It makes a class immutable.",
+        "Action": null,
+        "IsAnswer": false
+      },
+      {
+        "Text": "It prevents a class from being inherited.",
+        "Action": null,
+        "IsAnswer": true
+      },
+      {
+        "Text": "It hides a class from the rest of the application.",
+        "Action": null,
+        "IsAnswer": false
+      }
+    ],
     "Difficulty": 2,
     "SampleCode": "",
-    "Hint": "Think about how 'ref' and 'out' are used when passing arguments to methods.",
-    "Tags": [],
-    "Explanation": "The 'ref' keyword is used for both input and output parameters, while the 'out' keyword is used only for output parameters.",
+    "Hint": "Think about class inheritance.",
+    "Tags": [
+      "keywords",
+      "class",
+      "inheritance"
+    ],
+    "Explanation": "In C#, the 'sealed' keyword is used to prevent a class from being inherited.",
     "Learned": false,
-    "name": "D2 Diff Ref and Out",
+    "name": "D2 Sealed Keyword",
     "hideFlags": 0
   },
   {
     "ProgrammingLanguage": 8,
-    "Category": 0,
-    "QuestionPrompt": "What is the difference between value types and reference types in C#?\n1: Value types are stored on the heap, while reference types are stored on the stack.\n2: Value types and reference types are both stored on the stack.\n3: Value types are stored on the stack, while reference types are stored on the heap.\n4: Value types and reference types are both stored on the heap.",
-    "Answer": 3,
-    "Difficulty": 2,
+    "Category": 8,
+    "QuestionPrompt": "What is an interface in C#?",
+    "Options": [
+      {
+        "Text": "A class that can't be instantiated.",
+        "Action": null,
+        "IsAnswer": false
+      },
+      {
+        "Text": "A class with only abstract methods.",
+        "Action": null,
+        "IsAnswer": true
+      },
+      {
+        "Text": "A class with only virtual methods.",
+        "Action": null,
+        "IsAnswer": false
+      },
+      {
+        "Text": "A class with only sealed methods.",
+        "Action": null,
+        "IsAnswer": false
+      }
+    ],
+    "Difficulty": 3,
     "SampleCode": "",
-    "Hint": "Think about how value types and reference types are stored and passed in memory.",
-    "Tags": [],
-    "Explanation": "Value types are stored on the stack and contain the actual data, while reference types are stored on the heap and contain a reference to the data.",
-    "Learned": false,
-    "name": "D2 Diff Ref and Value Types",
+    "Hint": "Consider the purpose and usage of interfaces in C#.",
+    "Tags": [
+      "keywords",
+      "class",
+      "interface"
+    ],
+    "Explanation": "In C#, an interface is like an abstract class with only abstract methods. It's a contract for a class that guarantees specific functionality.",
+    "Learned": true,
+    "name": "D3 Interface",
+    "hideFlags": 0
+  },
+  {
+    "ProgrammingLanguage": 8,
+    "Category": 128,
+    "QuestionPrompt": "What is the time complexity of Quick Sort in the worst-case scenario?",
+    "Options": [
+      {
+        "Text": "O(n)",
+        "Action": null,
+        "IsAnswer": false
+      },
+      {
+        "Text": "O(n^2)",
+        "Action": null,
+        "IsAnswer": true
+      },
+      {
+        "Text": "O(n log n)",
+        "Action": null,
+        "IsAnswer": false
+      },
+      {
+        "Text": "O(log n)",
+        "Action": null,
+        "IsAnswer": false
+      }
+    ],
+    "Difficulty": 4,
+    "SampleCode": "",
+    "Hint": "Think about the worst-case scenario when all elements are already sorted.",
+    "Tags": [
+      "Algorithms",
+      "Quick Sort",
+      "Time Complexity"
+    ],
+    "Explanation": "In the worst case, Quick Sort has a time complexity of O(n^2) when all elements are already sorted, or reverse sorted.",
+    "Learned": true,
+    "name": "D4 Time Complexity of Quick Sort",
     "hideFlags": 0
   }
 ]

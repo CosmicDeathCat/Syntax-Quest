@@ -462,47 +462,9 @@ namespace DLS.Game.Scripts.Prompts
             }
 
             var randomPrompt = learningPrompt[Random.Range(0, learningPrompt.Count)];
-            PopupDisplayUI.instance.ShowOptionsPopup(randomPrompt.QuestionPrompt, () =>
-            {
-                if (randomPrompt.Answer == 1)
-                {
-                    PopupDisplayUI.instance.ShowConfirmPopup("CORRECT!", () => { });
-                }
-                else
-                {
-                    PopupDisplayUI.instance.ShowConfirmPopup("INCORRECT!", () => { });
-                }
-            }, () =>
-            {
-                if (randomPrompt.Answer == 2)
-                {
-                    PopupDisplayUI.instance.ShowConfirmPopup("CORRECT!", () => { });
-                }
-                else
-                {
-                    PopupDisplayUI.instance.ShowConfirmPopup("INCORRECT!", () => { });
-                }
-            }, () =>
-            {
-                if (randomPrompt.Answer == 3)
-                {
-                    PopupDisplayUI.instance.ShowConfirmPopup("CORRECT!", () => { });
-                }
-                else
-                {
-                    PopupDisplayUI.instance.ShowConfirmPopup("INCORRECT!", () => { });
-                }
-            }, () =>
-            {
-                if (randomPrompt.Answer == 4)
-                {
-                    PopupDisplayUI.instance.ShowConfirmPopup("CORRECT!", () => { });
-                }
-                else
-                {
-                    PopupDisplayUI.instance.ShowConfirmPopup("INCORRECT!", () => { });
-                }
-            });
+
+            // Display the popup with the question and shuffled options
+            PopupDisplayUI.instance.ShowOptionsPopup(randomPrompt.QuestionPrompt, randomPrompt.Options);
         }
     }
 }

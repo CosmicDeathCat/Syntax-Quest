@@ -2,14 +2,15 @@ using DLS.Game.Scripts.PlayerPrefsPlus;
 using PlayerPrefsPlus;
 using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.Tilemaps;
 
 namespace DLS.Game.Scripts.Utility
 {
     public class DrawGrid : MonoBehaviour
     {
-        [SerializeField] private GameObject gridTilePrefab;
-        [SerializeField] private Vector2 offset;
+        [field: SerializeField] private GameObject GridTilePrefab { get; set; }
+        [field: SerializeField] private Vector2 Offset { get; set; }
         private Tilemap tileMap;
 
         private void OnEnable()
@@ -45,8 +46,8 @@ namespace DLS.Game.Scripts.Utility
             {
                 for (int y = 0; y < tileMap.size.y; y++)
                 {
-                    var spawnPosition = new Vector3(x + offset.x, y + offset.y);
-                    var spawnedTile = Instantiate(gridTilePrefab, spawnPosition, quaternion.identity,
+                    var spawnPosition = new Vector3(x + Offset.x, y + Offset.y);
+                    var spawnedTile = Instantiate(GridTilePrefab, spawnPosition, quaternion.identity,
                         tileMap.transform);
                     spawnedTile.name = $"Tile ({x},{y})";
                 }

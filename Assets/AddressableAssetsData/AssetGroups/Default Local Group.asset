@@ -17,10 +17,11 @@ MonoBehaviour:
     m_SerializedData: []
   m_GUID: 166fc43c966f28a4b9e26ef78cb48662
   m_SerializeEntries:
-  - m_GUID: 559c6f64066e89a4a8429b0179cc94ea
-    m_Address: CSharpPrompts
+  - m_GUID: a0a4eb9e6bea1ed41ac38cce121b2487
+    m_Address: Assets/StreamingAssets/CodePrompts/CSharpPrompts.json
     m_ReadOnly: 0
-    m_SerializedLabels: []
+    m_SerializedLabels:
+    - Addressable
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 00edf22f0aabde64cabcd440148baf98, type: 2}
   m_SchemaSet:

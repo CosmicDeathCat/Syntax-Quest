@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e59e10e3d3b0e648baf502008a74ac1, type: 3}
+  m_Name: D2 Sealed Keyword
+  m_EditorClassIdentifier: 
+  <ProgrammingLanguage>k__BackingField: 8
+  <Category>k__BackingField: 8
+  <QuestionPrompt>k__BackingField: In C#, what does the 'sealed' keyword do?
+  <Options>k__BackingField:
+  - <Text>k__BackingField: It prevents a class from being instantiated.
+    <IsAnswer>k__BackingField: 0
+  - <Text>k__BackingField: It makes a class immutable.
+    <IsAnswer>k__BackingField: 0
+  - <Text>k__BackingField: It prevents a class from being inherited.
+    <IsAnswer>k__BackingField: 1
+  - <Text>k__BackingField: It hides a class from the rest of the application.
+    <IsAnswer>k__BackingField: 0
+  <Difficulty>k__BackingField: 2
+  <SampleCode>k__BackingField: 
+  <Hint>k__BackingField: Think about class inheritance.
+  <Tags>k__BackingField:
+  - keywords
+  - class
+  - inheritance
+  <Explanation>k__BackingField: In C#, the 'sealed' keyword is used to prevent a
+    class from being inherited.
+  <Learned>k__BackingField: 0

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 using System.Threading.Tasks;
+using UnityEditor;
 #if UNITY_EDITOR
 using UnityEditor.AddressableAssets;
 using UnityEditor.AddressableAssets.Settings;
@@ -97,7 +98,6 @@ namespace DLS.Game.Scripts.Utility
                 return (false, string.Empty);
             }
         }
-
         
         public static async Task<(bool success, string message)> WriteJsonAsync(BasePath basePath, string path, string jsonContent)
         {
@@ -112,7 +112,7 @@ namespace DLS.Game.Scripts.Utility
                     Directory.CreateDirectory(directoryPath);
                 }
 
-#if UNITY_EDITOR
+        #if UNITY_EDITOR
                 if (basePath == BasePath.StreamingAssets && (Application.isEditor || Application.platform == RuntimePlatform.WindowsPlayer))
                 {
                     // Copy the file to the streaming assets folder in the Unity Editor or Windows Player
@@ -126,18 +126,45 @@ namespace DLS.Game.Scripts.Utility
 
                     // Mark the file as addressable through the Addressable Asset System
                     string address = Path.GetFileNameWithoutExtension(fullPath);
-                    var entry = GetAddressableAssetEntry(address);
-                    if (entry != null)
+
+                    // Get the AddressableAssetSettings
+                    var settings = AddressableAssetSettingsDefaultObject.Settings;
+
+                    if (settings != null)
                     {
-                        entry.Result.address = address;
-                        entry.Result.SetLabel("Addressable", true);
-                    }
-                    else
-                    {
-                        throw new Exception($"Failed to get AddressableAssetEntry for address: {address}");
+                        var group = settings.DefaultGroup;
+
+                        if (group != null)
+                        {
+                            // Make sure the asset database is up to date
+                            AssetDatabase.Refresh();
+
+                            // Get the relative path
+                            string relativePath = fullPath.Replace(Application.dataPath, "Assets");
+
+                            // Create or move an entry for the asset
+                            var guid = AssetDatabase.AssetPathToGUID(relativePath);
+                            if (!string.IsNullOrEmpty(guid))
+                            {
+                                var entry = settings.CreateOrMoveEntry(guid, group);
+
+                                if (entry != null)
+                                {
+                                    entry.SetLabel("Addressable", true);
+                                }
+                                else
+                                {
+                                    throw new Exception($"Failed to create or move AddressableAssetEntry for address: {address}");
+                                }
+                            }
+                            else
+                            {
+                                throw new Exception($"Failed to find GUID for path: {relativePath}");
+                            }
+                        }
                     }
                 }
-#endif
+        #endif
 
                 // Write the file directly to the specified base path
                 await File.WriteAllTextAsync(fullPath, jsonContent);
@@ -149,6 +176,7 @@ namespace DLS.Game.Scripts.Utility
                 return (false, e.Message);
             }
         }
+
 
 
         public static (bool success, string[] files, string[] copiedPaths) CopyFiles(BasePath sourceBasePath, BasePath destinationBasePath, params string[] filePaths)

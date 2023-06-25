@@ -44,5 +44,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eeb060ed7f62790428748f7262c0d271, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enableGridOverlay: 1
-  enableOnScreenJoystick: 1
+  _enableGridOverlay: 1
+  _enableOnScreenJoystick: 0

@@ -13,7 +13,7 @@ namespace DLS.Game.Scripts.Npcs
 {
     public class Npc : ActorController
     {
-        [field: SerializeField] public int PromptDifficulty { get; } = 1;
+        [field: SerializeField] public int PromptDifficulty { get; set; } = 1;
 
         protected override void OnTriggerEnter2D(Collider2D col)
         {

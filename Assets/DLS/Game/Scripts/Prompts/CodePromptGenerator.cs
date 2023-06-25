@@ -166,11 +166,28 @@ namespace DLS.Game.Scripts.Prompts
                             string jsonFolderPath = Path.Combine(Application.streamingAssetsPath, folderName);
                             string jsonFilePath = Path.Combine(jsonFolderPath, jsonFileName);
 
-                            if (!File.Exists(jsonFilePath))
+        #if UNITY_EDITOR || UNITY_STANDALONE_WIN
+                            prompts = LoadAll<CodePrompt>($"CodePrompts/{ProgrammingLanguages.CSharp}").ToList();
+                            jsonContent = JsonConvert.SerializeObject(prompts, Formatting.Indented, new CodePromptConverter());
+                            
+                            if (File.Exists(jsonFilePath))
                             {
-#if UNITY_EDITOR || UNITY_STANDALONE_WIN
-                                prompts = LoadAll<CodePrompt>($"CodePrompts/{ProgrammingLanguages.CSharp}").ToList();
-                                jsonContent = JsonConvert.SerializeObject(prompts, Formatting.Indented, new CodePromptConverter());
+                                string existingJsonContent = File.ReadAllText(jsonFilePath);
+                                if (existingJsonContent != jsonContent) // If the content has changed
+                                {
+                                    writeJson = await SQUtilities.WriteJsonAsync(BasePath.Addressables, jsonFilePath, jsonContent);
+                                    if (writeJson.success)
+                                    {
+                                        Debug.Log($"C# Prompts JSON being overwritten: {jsonFilePath}");
+                                    }
+                                    else
+                                    {
+                                        Debug.LogWarning($"Failed to overwrite JSON at filepath: {jsonFilePath}");
+                                    }
+                                }
+                            }
+                            else
+                            {
                                 writeJson = await SQUtilities.WriteJsonAsync(BasePath.Addressables, jsonFilePath, jsonContent);
                                 if (writeJson.success)
                                 {
@@ -180,7 +197,8 @@ namespace DLS.Game.Scripts.Prompts
                                 {
                                     Debug.LogWarning($"Failed to write JSON to filepath: {jsonFilePath}");
                                 }
-#else
+                            }
+        #else
                             var loadJson = await SQUtilities.LoadJsonAsync(BasePath.Addressables, jsonFilePath);
                             if (loadJson.success)
                             {
@@ -192,15 +210,7 @@ namespace DLS.Game.Scripts.Prompts
                             {
                                 Debug.LogWarning($"Failed to load JSON from filepath: {jsonFilePath}");
                             }
-#endif
-                            }
-
-                            if (File.Exists(jsonFilePath))
-                            {
-                                jsonContent = File.ReadAllText(jsonFilePath);
-                                prompts = JsonConvert.DeserializeObject<List<CodePrompt>>(jsonContent, new CodePromptConverter());
-                                Debug.Log($"C# Prompts JSON being loaded successfully: {jsonFilePath}");
-                            }
+        #endif
 
                             if (prompts != null && prompts.Count > 0)
                             {
@@ -218,6 +228,7 @@ namespace DLS.Game.Scripts.Prompts
                 Debug.LogError(e.Message, this);
             }
         }
+
 
 
         private void Awake()

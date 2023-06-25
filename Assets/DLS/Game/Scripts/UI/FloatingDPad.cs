@@ -1,8 +1,12 @@
 using System;
+using DLS.Dialogue;
+using DLS.Game.Scripts.Messages;
 using DLS.Game.Scripts.Player;
 using DLS.Game.Scripts.PlayerPrefsPlus;
+using DLS.Utilities;
 using PlayerPrefsPlus;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.Tilemaps;
 using UnityEngine.UI;
 
@@ -12,12 +16,12 @@ namespace DLS.Game.Scripts.UI
     [DisallowMultipleComponent]
     public class FloatingDPad : MonoBehaviour
     {
-        [SerializeField] private GameObject joystick;
-        [SerializeField] private LayerMask objectLayerMask;
-        [SerializeField] private Button upButton;
-        [SerializeField] private Button rightButton;
-        [SerializeField] private Button downButton;
-        [SerializeField] private Button leftButton;
+        [field: SerializeField] private GameObject Joystick;
+        [field: SerializeField] private LayerMask ObjectLayerMask;
+        [field: SerializeField] private Button UpButton;
+        [field: SerializeField] private Button RightButton;
+        [field: SerializeField] private Button DownButton;
+        [field: SerializeField] private Button LeftButton;
         private Tilemap objectLayerTilemap;
         private Tilemap objectUnderPlayerTilemap;
         private Vector2 pos;
@@ -25,7 +29,6 @@ namespace DLS.Game.Scripts.UI
         private TileBase objectUnderPlayerTile;
         private Collider2D colliderAtPos;
         private PlayerController player;
-        public static Action<bool> OnJoystickEnable;
 
         private void Awake()
         {
@@ -37,27 +40,29 @@ namespace DLS.Game.Scripts.UI
         private void Start()
         {
             var enableOnScreenJoystick = PPPlus.GetBool(Prefs.EnableOnScreenJoystick);
-            JoystickEnable(enableOnScreenJoystick);
+            MessageSystem.MessageManager.SendImmediate(MessageChannels.UI, new JoystickEnableMessage(enableOnScreenJoystick));
         }
 
         private void OnEnable()
         {
-            upButton.onClick.AddListener(() => { Move(Vector2.up, player.MoveSpeed); });
-            rightButton.onClick.AddListener(() => { Move(Vector2.right, player.MoveSpeed); });
-            downButton.onClick.AddListener(() => { Move(Vector2.down, player.MoveSpeed); });
-            leftButton.onClick.AddListener(() => { Move(Vector2.left, player.MoveSpeed); });
+            UpButton.onClick.AddListener(() => { Move(Vector2.up, player.MoveSpeed); });
+            RightButton.onClick.AddListener(() => { Move(Vector2.right, player.MoveSpeed); });
+            DownButton.onClick.AddListener(() => { Move(Vector2.down, player.MoveSpeed); });
+            LeftButton.onClick.AddListener(() => { Move(Vector2.left, player.MoveSpeed); });
             PPPlus.OnPrefChanged += OnPrefChanged;
-            OnJoystickEnable += OnJoystickEnableCallback;
+            MessageSystem.MessageManager.RegisterForChannel<JoystickEnableMessage>(MessageChannels.UI, OnJoystickEnableCallback);
         }
+
+
 
         private void OnDisable()
         {
-            upButton.onClick.RemoveAllListeners();
-            rightButton.onClick.RemoveAllListeners();
-            downButton.onClick.RemoveAllListeners();
-            leftButton.onClick.RemoveAllListeners();
+            UpButton.onClick.RemoveAllListeners();
+            RightButton.onClick.RemoveAllListeners();
+            DownButton.onClick.RemoveAllListeners();
+            LeftButton.onClick.RemoveAllListeners();
             PPPlus.OnPrefChanged -= OnPrefChanged;
-            OnJoystickEnable -= OnJoystickEnableCallback;
+            MessageSystem.MessageManager.UnregisterForChannel<JoystickEnableMessage>(MessageChannels.UI, OnJoystickEnableCallback);
         }
 
         public void Move(Vector2 movement, float moveSpeed)
@@ -67,12 +72,10 @@ namespace DLS.Game.Scripts.UI
                 pos = movement * moveSpeed;
 
                 objectTile = objectLayerTilemap.GetTile(
-                    objectLayerTilemap.WorldToCell(player.transform.position + new Vector3(-0.5f, -0.5f) +
-                                                   (Vector3)pos));
+                    objectLayerTilemap.WorldToCell(player.transform.position + new Vector3(-0.5f, -0.5f) + (Vector3)pos));
                 objectUnderPlayerTile = objectUnderPlayerTilemap.GetTile(
-                    objectUnderPlayerTilemap.WorldToCell(player.transform.position + new Vector3(-0.5f, -0.5f) +
-                                                         (Vector3)pos));
-                colliderAtPos = Physics2D.OverlapPoint(player.transform.position + (Vector3)pos, objectLayerMask);
+                    objectUnderPlayerTilemap.WorldToCell(player.transform.position + new Vector3(-0.5f, -0.5f) + (Vector3)pos));
+                colliderAtPos = Physics2D.OverlapPoint(player.transform.position + (Vector3)pos, ObjectLayerMask);
 
                 if (movement.y > 0)
                 {
@@ -95,7 +98,7 @@ namespace DLS.Game.Scripts.UI
                 Vector3 newPosition = player.transform.position + (Vector3)pos;
 
                 if (objectTile != null || objectUnderPlayerTile != null ||
-                    Physics2D.OverlapPoint(newPosition, objectLayerMask) != null)
+                    Physics2D.OverlapPoint(newPosition, ObjectLayerMask) != null)
                 {
                     return;
                 }
@@ -113,18 +116,13 @@ namespace DLS.Game.Scripts.UI
         {
             if (key.Equals(Prefs.EnableOnScreenJoystick))
             {
-                joystick.SetActive((bool)obj);
+                Joystick.SetActive((bool)obj);
             }
         }
-
-        private void OnJoystickEnableCallback(bool enabled)
+        
+        private void OnJoystickEnableCallback(MessageSystem.IMessageEnvelope messageEnvelope)
         {
-            joystick.SetActive(enabled);
-        }
-
-        public static void JoystickEnable(bool enabled)
-        {
-            OnJoystickEnable?.Invoke(enabled);
+            Joystick.SetActive(messageEnvelope.Message<JoystickEnableMessage>().Enabled);
         }
     }
 }

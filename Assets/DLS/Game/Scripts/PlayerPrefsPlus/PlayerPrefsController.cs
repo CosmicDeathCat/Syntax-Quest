@@ -1,5 +1,6 @@
 using PlayerPrefsPlus;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace DLS.Game.Scripts.PlayerPrefsPlus
 {
@@ -7,20 +8,13 @@ namespace DLS.Game.Scripts.PlayerPrefsPlus
     public class PlayerPrefsController : MonoBehaviour
     {
         public static PlayerPrefsController instance;
+
         [SerializeField] private bool enableGridOverlay = true;
         [SerializeField] private bool enableOnScreenJoystick = false;
 
-        public bool EnableGridOverlay
-        {
-            get => enableGridOverlay;
-            set => enableGridOverlay = value;
-        }
+        public bool EnableGridOverlay { get => enableGridOverlay; set => enableGridOverlay = value; }
 
-        public bool EnableOnScreenJoystick
-        {
-            get => enableOnScreenJoystick;
-            set => enableOnScreenJoystick = value;
-        }
+        public bool EnableOnScreenJoystick { get => enableOnScreenJoystick; set => enableOnScreenJoystick = value; }
 
         private void Awake()
         {
@@ -32,16 +26,6 @@ namespace DLS.Game.Scripts.PlayerPrefsPlus
             {
                 instance = this;
             }
-        }
-
-        private void Start()
-        {
-#if UNITY_ANDROID || UNITY_IOS
-            enableOnScreenJoystick = true;
-#endif
-
-            PPPlus.SetBool(Prefs.EnableGridOverlay, enableGridOverlay);
-            PPPlus.SetBool(Prefs.EnableOnScreenJoystick, enableOnScreenJoystick);
         }
     }
 }

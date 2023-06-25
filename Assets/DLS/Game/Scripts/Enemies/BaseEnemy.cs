@@ -11,7 +11,7 @@ namespace DLS.Game.Scripts.Enemies
 {
     public class BaseEnemy : ActorController
     {
-        [field: SerializeField] public int PromptDifficulty { get; } = 1;
+        [field: SerializeField] public int PromptDifficulty { get; set; } = 1;
 
         private void OnTriggerEnter2D(Collider2D col)
         {
