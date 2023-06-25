@@ -2514,6 +2514,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 69652581}
     m_Modifications:
+    - target: {fileID: 5189784111454633916, guid: 39f14588165b768499b2326b55959e98, type: 3}
+      propertyPath: actorName
+      value: Edward
+      objectReference: {fileID: 0}
     - target: {fileID: 5949220919180367072, guid: 39f14588165b768499b2326b55959e98, type: 3}
       propertyPath: m_RootOrder
       value: 1

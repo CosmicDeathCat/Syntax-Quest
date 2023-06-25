@@ -124,4 +124,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7f76d6f5bf4fd64aae1c162ea810f1f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  promptDifficulty: 1
+  actorName: Edward
+  portrait: {fileID: 0}
+  isInteracting: 0
+  isMovementDisabled: 0
+  dialogueManager: {fileID: 11400000, guid: 6478b7cdf139096409d57104835a01b7, type: 2}

@@ -1,12 +1,18 @@
 using System;
+using DLS.Core;
+using DLS.Dialogue;
+using DLS.Game.Scripts.Messages;
+using DLS.Game.Scripts.Npcs;
 using DLS.Game.Scripts.Prompts;
+using DLS.Utilities;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.EnhancedTouch;
 using UnityEngine.Tilemaps;
 
 namespace DLS.Game.Scripts.Player
 {
-    public class PlayerController : MonoBehaviour
+    public class PlayerController : ActorController
     {
         [SerializeField] private float moveSpeed = 1;
         [SerializeField] private LayerMask objectLayerMask;
@@ -24,9 +30,7 @@ namespace DLS.Game.Scripts.Player
         private TileBase objectTile;
         private TileBase objectUnderPlayerTile;
         private Collider2D colliderAtPos;
-
-        public static Action<bool> OnPaused;
-
+        
         public float MoveSpeed
         {
             get => moveSpeed;
@@ -62,30 +66,24 @@ namespace DLS.Game.Scripts.Player
 
         private void OnEnable()
         {
+            base.OnEnable();
             playerInput.Enable();
             playerInput.Player.Move.performed += Move_performed;
             playerInput.Player.Move.canceled += Move_canceled;
-            OnPaused += OnPausedHandler;
+            playerInput.Player.Interact.performed += Interact_performed;
+            MessageSystem.MessageManager.RegisterForChannel<PauseMessage>(MessageChannels.GameFlow, PauseHandler);
         }
+
+
 
 
         private void OnDisable()
         {
+            base.OnDisable();
             playerInput.Disable();
             playerInput.Player.Move.performed -= Move_performed;
             playerInput.Player.Move.canceled -= Move_canceled;
-            OnPaused -= OnPausedHandler;
-        }
-
-
-        private void OnPausedHandler(bool paused)
-        {
-            if (paused)
-            {
-                playerInput.Disable();
-            }
-            else
-                playerInput.Enable();
+            playerInput.Player.Interact.performed -= Interact_performed;
         }
 
         private void Move_canceled(UnityEngine.InputSystem.InputAction.CallbackContext input)
@@ -98,8 +96,7 @@ namespace DLS.Game.Scripts.Player
             movement = input.ReadValue<Vector2>().normalized;
             pos = movement * moveSpeed;
 
-            objectTile =
-                objectLayerTilemap.GetTile(
+            objectTile = objectLayerTilemap.GetTile(
                     objectLayerTilemap.WorldToCell(transform.position + new Vector3(-0.5f, -0.5f) + (Vector3)pos));
             objectUnderPlayerTile = objectUnderPlayerTilemap.GetTile(
                 objectUnderPlayerTilemap.WorldToCell(transform.position + new Vector3(-0.5f, -0.5f) + (Vector3)pos));
@@ -139,11 +136,40 @@ namespace DLS.Game.Scripts.Player
 
             transform.position = newPosition;
         }
-
-        public static bool Paused(bool isPaused)
+        
+        private void Interact_performed(InputAction.CallbackContext input)
         {
-            OnPaused.Invoke(isPaused);
-            return isPaused;
+            Interact();
+        }
+        
+        private void PauseHandler(MessageSystem.IMessageEnvelope messageEnvelope)
+        {
+            if (messageEnvelope.Message<PauseMessage>().Paused)
+            {
+                playerInput.Disable();
+            }
+            else
+            {
+                playerInput.Enable();
+
+            }
+        }
+
+        protected override void OnDialogueInteract(MessageSystem.IMessageEnvelope messageEnvelope)
+        {
+            if (gameObject != messageEnvelope.Message<DialogueInteractMessage>().Target) return;
+            var npc = targetGameObject.GetComponent<Npc>();
+            if(npc == null) return;
+            if (isInteracting) return;
+            if (dialogueManager == null)
+            {
+                CodePromptDisplay.ShowLearningPrompt(this, npc.PromptDifficulty);
+            }
+            else
+            {
+                if (!dialogueManager.StartDialogue()) return;
+            }
+            DialogueUi.Instance.HideInteractionText();
         }
     }
 }

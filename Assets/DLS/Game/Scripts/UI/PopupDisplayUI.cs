@@ -1,4 +1,7 @@
+using DLS.Dialogue;
+using DLS.Game.Scripts.Messages;
 using DLS.Game.Scripts.Player;
+using DLS.Utilities;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
@@ -121,7 +124,7 @@ namespace DLS.Game.Scripts.UI
             UnityAction option2Action = null, UnityAction option3Action = null, UnityAction option4Action = null)
         {
             optionsDialog.gameObject.SetActive(true);
-            PlayerController.Paused(true);
+            MessageSystem.MessageManager.SendImmediate(MessageChannels.GameFlow, new PauseMessage(true));
             FloatingDPad.JoystickEnable(false);
             optionsPopupText.text = text;
             eventSystem.SetSelectedGameObject(option1Button.gameObject);
@@ -173,7 +176,7 @@ namespace DLS.Game.Scripts.UI
         public void ShowTextPopup(string text, UnityAction okAction = null)
         {
             textDialog.gameObject.SetActive(true);
-            PlayerController.Paused(true);
+            MessageSystem.MessageManager.SendImmediate(MessageChannels.GameFlow, new PauseMessage(true));
             FloatingDPad.JoystickEnable(false);
             textPopupText.text = text;
             eventSystem.SetSelectedGameObject(okButton.gameObject);
@@ -187,7 +190,7 @@ namespace DLS.Game.Scripts.UI
         public void ShowConfirmPopup(string text, UnityAction confirmAction = null, UnityAction cancelAction = null)
         {
             confirmDialog.gameObject.SetActive(true);
-            PlayerController.Paused(true);
+            MessageSystem.MessageManager.SendImmediate(MessageChannels.GameFlow, new PauseMessage(true));
             FloatingDPad.JoystickEnable(false);
             confimPopupText.text = text;
             eventSystem.SetSelectedGameObject(confirmButton.gameObject);
@@ -224,7 +227,7 @@ namespace DLS.Game.Scripts.UI
             option2Button.onClick.RemoveAllListeners();
             option3Button.onClick.RemoveAllListeners();
             option4Button.onClick.RemoveAllListeners();
-            PlayerController.Paused(false);
+            MessageSystem.MessageManager.SendImmediate(MessageChannels.GameFlow, new PauseMessage(false));
             FloatingDPad.JoystickEnable(true);
         }
 
@@ -233,7 +236,7 @@ namespace DLS.Game.Scripts.UI
             confirmDialog.SetActive(false);
             confirmButton.onClick.RemoveAllListeners();
             cancelButton.onClick.RemoveAllListeners();
-            PlayerController.Paused(false);
+            MessageSystem.MessageManager.SendImmediate(MessageChannels.GameFlow, new PauseMessage(false));
             FloatingDPad.JoystickEnable(true);
         }
 
@@ -250,7 +253,7 @@ namespace DLS.Game.Scripts.UI
         {
             textDialog.SetActive(false);
             okButton.onClick.RemoveAllListeners();
-            PlayerController.Paused(false);
+            MessageSystem.MessageManager.SendImmediate(MessageChannels.GameFlow, new PauseMessage(false));
             FloatingDPad.JoystickEnable(true);
         }
     }
