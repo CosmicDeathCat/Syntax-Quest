@@ -12,6 +12,29 @@ namespace DLS.Game.Scripts.Player
         [SerializeField] private LayerMask objectLayerMask;
         [SerializeField] private ProgrammingLanguages availableLanguages;
         [SerializeField] private ProgrammingLanguages currentLanguage;
+
+        /*
+         * For Testing Purposes
+         */
+        [SerializeField] private int maxHealth;
+        [SerializeField] private int currentHealth;
+
+        public int MaxHealth
+        {
+            get => maxHealth;
+            set => maxHealth = value;
+        }
+
+        public int CurrentHealth
+        {
+            get => currentHealth;
+            set => currentHealth = value;
+        }
+        
+        /*
+         *  End Testing 
+         */
+        
         private Tilemap objectLayerTilemap;
         private Tilemap objectUnderPlayerTilemap;
         private Animator anim;
