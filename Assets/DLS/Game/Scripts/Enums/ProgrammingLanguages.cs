@@ -1,4 +1,4 @@
-namespace DLS.Game.Scripts.Prompts
+namespace DLS.Game.Scripts.Enums
 {
     [System.Flags]
     public enum ProgrammingLanguages

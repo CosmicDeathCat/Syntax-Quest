@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using DLS.Core;
+using DLS.Game.Scripts.Enums;
 using DLS.Game.Scripts.Player;
 using DLS.Game.Scripts.UI;
 using UnityEngine;

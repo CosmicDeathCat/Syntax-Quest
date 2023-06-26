@@ -72,7 +72,7 @@
       "inheritance"
     ],
     "Explanation": "In C#, the 'sealed' keyword is used to prevent a class from being inherited.",
-    "Learned": false,
+    "Learned": true,
     "name": "D2 Sealed Keyword",
     "hideFlags": 0
   },
@@ -111,7 +111,7 @@
       "interface"
     ],
     "Explanation": "In C#, an interface is like an abstract class with only abstract methods. It's a contract for a class that guarantees specific functionality.",
-    "Learned": true,
+    "Learned": false,
     "name": "D3 Interface",
     "hideFlags": 0
   },

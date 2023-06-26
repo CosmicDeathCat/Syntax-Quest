@@ -1,6 +1,7 @@
 using System;
 using DLS.Core;
 using DLS.Dialogue;
+using DLS.Game.Scripts.Enums;
 using DLS.Game.Scripts.Messages;
 using DLS.Game.Scripts.Npcs;
 using DLS.Game.Scripts.Prompts;
