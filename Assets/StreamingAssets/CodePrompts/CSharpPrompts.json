@@ -33,7 +33,7 @@
       "keywords"
     ],
     "Explanation": "In C#, the 'base' keyword is used to access members of the base class from within a derived class.",
-    "Learned": true,
+    "Learned": false,
     "name": "D1 Base Keyword",
     "hideFlags": 0
   },
@@ -72,7 +72,7 @@
       "inheritance"
     ],
     "Explanation": "In C#, the 'sealed' keyword is used to prevent a class from being inherited.",
-    "Learned": true,
+    "Learned": false,
     "name": "D2 Sealed Keyword",
     "hideFlags": 0
   },

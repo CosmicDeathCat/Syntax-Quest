@@ -1,7 +1,9 @@
+using System;
 using UnityEngine;
 
 namespace DLS.Dialogue
 {
+    [Serializable]
     public struct DialogueInteractMessage
     {
         public GameObject Source { get; }
